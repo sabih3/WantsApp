@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "479935647100",
+    "project_id": "firebase-wantsapp"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:479935647100:android:46dfbeea10d629ee",
+        "android_client_info": {
+          "package_name": "wantapp.netaq.com.wantapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "479935647100-dq0ue48uravj3eb90gvi3farmt52hg6a.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "479935647100-plbhfem81oh6jk4ln9q2p4c6spepgrqi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "wantapp.netaq.com.wantapp",
+            "certificate_hash": "871e5b9b7bf70e063ecdee6a3e5e1852d26ccea3"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiEHCM6J986PdAF6IQgsilP-IzF30vyZ0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
