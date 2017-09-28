@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/add_alert_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="wantapp.netaq.com.wantapp.screens.ScreenAddAlert">
+
+
+    <RelativeLayout
+        android:id="@+id/add_alert_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="20dp">
+
+        <EditText
+            android:id="@+id/field_alert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone" />
+
+        <Button
+            android:id="@+id/btn_add_alert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/field_alert"
+            android:text="Add "/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/added_alerts_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_below="@id/btn_add_alert">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

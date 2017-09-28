@@ -1,26 +1,20 @@
 package wantapp.netaq.com.wantapp.screens;
 
 import android.content.Intent;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethod;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.time.Clock;
-import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import wantapp.netaq.com.wantapp.MainActivity;
 import wantapp.netaq.com.wantapp.R;
 import wantapp.netaq.com.wantapp.models.Want;
 import wantapp.netaq.com.wantapp.utils.WantsContainer;

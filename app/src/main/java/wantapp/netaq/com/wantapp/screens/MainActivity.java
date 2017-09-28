@@ -1,4 +1,4 @@
-package wantapp.netaq.com.wantapp;
+package wantapp.netaq.com.wantapp.screens;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import wantapp.netaq.com.wantapp.R;
 import wantapp.netaq.com.wantapp.adapters.FragmentPagerAdapter;
 import wantapp.netaq.com.wantapp.models.FragmentContainer;
 import wantapp.netaq.com.wantapp.screens.AlertsList;

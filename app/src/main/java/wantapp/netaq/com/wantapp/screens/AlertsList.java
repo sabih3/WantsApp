@@ -80,7 +80,7 @@ public class AlertsList extends Fragment {
     private class AddAlertListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            NavigationController.showSignInScreen(getActivity());
+            NavigationController.showAddAlertScreen(getActivity());
             //NavigationController.showCreateProfileScreen(getActivity());
         }
     }
