@@ -10,6 +10,19 @@ import com.quickblox.chat.model.QBChatDialog;
 
 public class ChatDialogCreatedEvent {
 
+    private Bundle params;
+    private QBChatDialog chatDialog;
+
     public ChatDialogCreatedEvent(QBChatDialog dialog, Bundle params) {
+        this.chatDialog = dialog;
+        this.params = params;
+    }
+
+    public Bundle getParams() {
+        return params;
+    }
+
+    public QBChatDialog getChatDialog() {
+        return chatDialog;
     }
 }

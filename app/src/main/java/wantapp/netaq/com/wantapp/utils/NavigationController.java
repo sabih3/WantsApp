@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 
 import wantapp.netaq.com.wantapp.R;
+import wantapp.netaq.com.wantapp.screens.chat_list.ScreenChatList;
+import wantapp.netaq.com.wantapp.screens.login.LoginFragment;
 import wantapp.netaq.com.wantapp.screens.ScreenAddAlert;
 import wantapp.netaq.com.wantapp.screens.ScreenCreateProfile;
 import wantapp.netaq.com.wantapp.screens.ScreenNewWant;
@@ -52,6 +54,18 @@ public class NavigationController {
     public static void showVerificationScreen(FragmentManager supportFragmentManager) {
         ScreenOTP otpFragment = new ScreenOTP();
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container,otpFragment,"").commit();
+
+    }
+
+    public static void showLoginFragment(FragmentManager supportFragmentManager) {
+        LoginFragment loginFragment = new LoginFragment();
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,loginFragment,"").commit();
+    }
+
+    public static void showConsumerChatListScreen(Context context) {
+        Intent intent = new Intent(context,ScreenChatList.class);
+        context.startActivity(intent);
+
 
     }
 }

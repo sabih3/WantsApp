@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-import com.quickblox.chat.QBChatService;
 import com.quickblox.chat.model.QBChatDialog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -23,11 +21,14 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import wantapp.netaq.com.wantapp.R;
 import wantapp.netaq.com.wantapp.adapters.ConsumerChatListAdapter;
+import wantapp.netaq.com.wantapp.db.managers.DialogDataManager;
+import wantapp.netaq.com.wantapp.db.models.Dialog;
 import wantapp.netaq.com.wantapp.eventbus.ActiveChatEvent;
 import wantapp.netaq.com.wantapp.eventbus.ChatDialogCreatedEvent;
 import wantapp.netaq.com.wantapp.screens.chat_screen.ScreenChat;
@@ -39,7 +40,7 @@ public class ScreenChatList extends AppCompatActivity implements ChatListView, C
     @BindView(R.id.chat_list_consumer)RecyclerView chatListConsumer;
 
     private ChatListPresenter chatListPresenter;
-    private ArrayList<QBChatDialog> mDialogList;
+    private List<Dialog> mDialogList;
     private ConsumerChatListAdapter consumerChatListAdapter;
 
     @Override
@@ -54,29 +55,27 @@ public class ScreenChatList extends AppCompatActivity implements ChatListView, C
 
         EventBus.getDefault().register(this);
 
+        getSupportActionBar();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void ChatDialogCreated(ChatDialogCreatedEvent event){
         //do this after receiving event
+        DialogDataManager.persistNewDialog(event.getChatDialog());
         chatListPresenter.checkUserHasPastChats();
     }
 
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void onChatMessageReceived(ActiveChatEvent event){
-//
-//        for(QBChatDialog dialog : mDialogList){
-//            if(dialog.getDialogId().equals(event.getDialogID())){
-//
-//
-//                dialog.setLastMessage(event.getQbChatMessage().getBody()) ;
-//                consumerChatListAdapter.notify();
-//
-//
-//
-//            }
-//        }
-//    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onChatMessageReceived(ActiveChatEvent event){
+
+        for(Dialog dialog : mDialogList){
+            if(dialog.getDialogId().equals(event.getDialogID())){
+
+                dialog.setLastMessage(event.getQbChatMessage().getBody()) ;
+                consumerChatListAdapter.notify();
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -111,7 +110,7 @@ public class ScreenChatList extends AppCompatActivity implements ChatListView, C
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     EditText field_user_id = alertLayout.findViewById(R.id.editTextDialogUserInput);
-                    String userid = field_user_id.getText().toString();
+                    String userid = field_user_id.getText().toString().trim();
 
                     int userID = Integer.parseInt(userid);
 
@@ -132,9 +131,10 @@ public class ScreenChatList extends AppCompatActivity implements ChatListView, C
     }
 
     @Override
-    public void initializeChatList(ArrayList<QBChatDialog> dialogsList) {
+    public void initializeChatList(List<Dialog> dialogsList) {
 
         this.mDialogList = dialogsList;
+
 
         showChatsInList(mDialogList);
     }
@@ -147,7 +147,7 @@ public class ScreenChatList extends AppCompatActivity implements ChatListView, C
 
 
 
-    private void showChatsInList(ArrayList<QBChatDialog> dialogsList) {
+    private void showChatsInList(List<Dialog> dialogsList) {
 
         ConsumerChatListAdapter consumerChatListAdapter = new ConsumerChatListAdapter(dialogsList);
         chatListConsumer.setLayoutManager(new LinearLayoutManager(this));

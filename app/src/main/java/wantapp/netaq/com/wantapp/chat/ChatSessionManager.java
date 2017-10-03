@@ -2,11 +2,8 @@ package wantapp.netaq.com.wantapp.chat;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.widget.Toast;
 
-import com.quickblox.auth.QBAuth;
-import com.quickblox.auth.session.QBSession;
-import com.quickblox.auth.session.QBSessionManager;
-import com.quickblox.auth.session.QBSessionParameters;
 import com.quickblox.auth.session.QBSettings;
 import com.quickblox.chat.QBChatService;
 import com.quickblox.chat.QBIncomingMessagesManager;
@@ -15,7 +12,6 @@ import com.quickblox.chat.exception.QBChatException;
 import com.quickblox.chat.listeners.QBChatDialogMessageListener;
 import com.quickblox.chat.model.QBChatDialog;
 import com.quickblox.chat.model.QBChatMessage;
-import com.quickblox.chat.model.QBDialogType;
 import com.quickblox.chat.utils.DialogUtils;
 import com.quickblox.core.QBEntityCallback;
 
@@ -26,13 +22,12 @@ import com.quickblox.users.QBUsers;
 import com.quickblox.users.model.QBUser;
 
 import org.greenrobot.eventbus.EventBus;
-import org.jivesoftware.smack.SmackException;
 
 import java.util.ArrayList;
 
 import wantapp.netaq.com.wantapp.eventbus.ActiveChatEvent;
 import wantapp.netaq.com.wantapp.eventbus.ChatDialogCreatedEvent;
-import wantapp.netaq.com.wantapp.utils.NotificationHelper;
+import wantapp.netaq.com.wantapp.utils.ChatUtils;
 
 /**
  * Created by sabih on 24-Sep-17.
@@ -73,61 +68,45 @@ public class ChatSessionManager {
         QBSettings.getInstance().init(context, APP_ID, AUTH_KEY, AUTH_SECRET);
         QBSettings.getInstance().setAccountKey(ACCOUNT_KEY);
 
-
-
     }
 
-    public boolean login(){
-        final QBUser azam = new QBUser("muhammad.azam@netaq.ae","netaq123");
-
-        final QBUser refaat = new QBUser("muhammed.refaat@netaq.ae","netaq123");
-
-        final QBUser sabih = new QBUser("sabih.ahmed@netaq.ae", "netaq123");
-
-        QBUsers.signIn(sabih).performAsync(new QBEntityCallback<QBUser>() {
+    public boolean login(QBUser qbUser, final QBLoginListener qbLoginListener){
+        QBUsers.signIn(qbUser).performAsync(new QBEntityCallback<QBUser>() {
             @Override
             public void onSuccess(QBUser qbUser, Bundle bundle) {
                 qbUser.setId(qbUser.getId());
                 qbUser.setPassword("netaq123");
-                loginChatService(qbUser);
+                loginChatService(qbUser,qbLoginListener);
             }
 
             @Override
             public void onError(QBResponseException e) {
-
+                qbLoginListener.onChatLoginFailure(e);
             }
         });
-
 
         return login;
 
     }
 
 
-    public void loginChatService(QBUser qbUser){
-        //final QBUser user = new QBUser("sabih.ahmed@netaq.ae", "netaq123");
-        // Initialise Chat service
-        final QBChatService chatService = QBChatService.getInstance();
+    public void loginChatService(QBUser qbUser, final QBLoginListener qbLoginListener){
 
-        //Set it before login in chat
-        QBChatService.ConfigurationBuilder builder = new QBChatService.ConfigurationBuilder();
-        builder.setAutojoinEnabled(true);
-        builder.setSocketTimeout(180); //Sets chat socket's read timeout in seconds
-        builder.setKeepAlive(true);
-        chatService.setConfigurationBuilder(builder);
+        final QBChatService chatService = QBChatService.getInstance();
+        chatService.setConfigurationBuilder(ChatUtils.getChatServiceConfiguration());
 
         chatService.login(qbUser, new QBEntityCallback() {
             @Override
             public void onSuccess(Object o, Bundle bundle) {
 
+                qbLoginListener.onLoggedInChat();
 
                 QBIncomingMessagesManager incomingMessagesManager = chatService.getIncomingMessagesManager();
                 incomingMessagesManager.addDialogMessageListener(new QBChatDialogMessageListener() {
                     @Override
                     public void processMessage(String s, QBChatMessage qbChatMessage, Integer integer) {
                         EventBus.getDefault().post(new ActiveChatEvent(s,qbChatMessage,integer));
-
-                        NotificationHelper.notify(context,qbChatMessage.getBody(),"");
+                        //NotificationHelper.notify(context,qbChatMessage.getBody(),"");
                     }
 
                     @Override
@@ -140,7 +119,7 @@ public class ChatSessionManager {
 
             @Override
             public void onError(QBResponseException e) {
-
+                qbLoginListener.onChatLoginFailure(e);
             }
         });
 
@@ -153,20 +132,26 @@ public class ChatSessionManager {
         //or just use DialogUtils
         //for creating PRIVATE dialog
         QBChatDialog dialog = DialogUtils.buildPrivateDialog(participantID);
+        if(!QBChatService.getInstance().isLoggedIn()){
 
-        QBRestChatService.createChatDialog(dialog).performAsync(new QBEntityCallback<QBChatDialog>() {
-            @Override
-            public void onSuccess(QBChatDialog dialog, Bundle params) {
+            Toast.makeText(context, "Chat Service Not Logged In", Toast.LENGTH_SHORT).show();
 
-                EventBus.getDefault().post(new ChatDialogCreatedEvent(dialog,params));
+        }else{
+            QBRestChatService.createChatDialog(dialog).performAsync(new QBEntityCallback<QBChatDialog>() {
+                @Override
+                public void onSuccess(QBChatDialog dialog, Bundle params) {
 
-            }
+                    EventBus.getDefault().post(new ChatDialogCreatedEvent(dialog,params));
 
-            @Override
-            public void onError(QBResponseException responseException) {
+                }
 
-            }
-        });
+                @Override
+                public void onError(QBResponseException responseException) {
+
+                }
+            });
+        }
+
     }
 
     public void getChatDialogs(final ChatDialogsListener chatDialogsListener){
@@ -192,5 +177,11 @@ public class ChatSessionManager {
     public interface ChatDialogsListener{
         void onSuccess(ArrayList<QBChatDialog> dialogsList);
         void onError(QBResponseException responseException);
+    }
+
+    public interface QBLoginListener {
+
+        void onLoggedInChat();
+        void onChatLoginFailure(QBResponseException e);
     }
 }

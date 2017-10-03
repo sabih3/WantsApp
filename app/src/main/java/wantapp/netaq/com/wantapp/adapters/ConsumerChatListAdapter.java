@@ -9,15 +9,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.quickblox.chat.model.QBChatDialog;
+import com.quickblox.chat.utils.DialogUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import wantapp.netaq.com.wantapp.R;
 import wantapp.netaq.com.wantapp.adapters.viewholders.ConsumerChatListHolder;
+import wantapp.netaq.com.wantapp.db.models.Dialog;
 import wantapp.netaq.com.wantapp.eventbus.ActiveChatEvent;
+import wantapp.netaq.com.wantapp.utils.ChatUtils;
 
 /**
  * Created by sabih on 25-Sep-17.
@@ -25,7 +29,7 @@ import wantapp.netaq.com.wantapp.eventbus.ActiveChatEvent;
 
 public class ConsumerChatListAdapter extends RecyclerView.Adapter<ConsumerChatListHolder> {
 
-    private ArrayList<QBChatDialog> mDataset;
+    private List<Dialog> mDataset;
     private Context mContext;
     private ConsumerDialogListener dialogListener;
     private ConsumerChatListHolder mHolder;
@@ -34,7 +38,7 @@ public class ConsumerChatListAdapter extends RecyclerView.Adapter<ConsumerChatLi
         this.dialogListener = dialogListener;
     }
 
-    public ConsumerChatListAdapter(ArrayList<QBChatDialog> dialogsList) {
+    public ConsumerChatListAdapter(List<Dialog> dialogsList) {
         this.mDataset = dialogsList;
 
         EventBus.getDefault().register(this);
@@ -43,7 +47,7 @@ public class ConsumerChatListAdapter extends RecyclerView.Adapter<ConsumerChatLi
 
     @Subscribe
     public void updateDialog(ActiveChatEvent event){
-        for(QBChatDialog dialog : mDataset){
+        for(Dialog dialog : mDataset){
             if(dialog.getDialogId().equals(event.getDialogID())){
                 //update unread count
                 mHolder.tvLastMessage.setText("");
@@ -72,18 +76,19 @@ public class ConsumerChatListAdapter extends RecyclerView.Adapter<ConsumerChatLi
 
         this.mHolder = holder;
 
-        final QBChatDialog chatDialog = mDataset.get(position);
+        final Dialog dialog = mDataset.get(position);
 
-        mHolder.tvLastMessage.setText(chatDialog.getLastMessage());
+        mHolder.tvLastMessage.setText(dialog.getLastMessage());
 
-        mHolder.tvName.setText(chatDialog.getName());
+        mHolder.tvName.setText(dialog.getTitle());
 
 
 
         mHolder.tvName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialogListener.onChatDialogClick(chatDialog);
+                QBChatDialog qbChatDialog = ChatUtils.transformDialog(dialog);
+                dialogListener.onChatDialogClick(qbChatDialog);
             }
         });
 

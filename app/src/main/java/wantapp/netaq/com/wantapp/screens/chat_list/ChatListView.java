@@ -1,8 +1,8 @@
 package wantapp.netaq.com.wantapp.screens.chat_list;
 
-import com.quickblox.chat.model.QBChatDialog;
+import java.util.List;
 
-import java.util.ArrayList;
+import wantapp.netaq.com.wantapp.db.models.Dialog;
 
 /**
  * Created by sabih on 24-Sep-17.
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public interface ChatListView {
 
-    void initializeChatList(ArrayList<QBChatDialog> dialogsList);
+    void initializeChatList(List<Dialog> dialogsList);
     void showNoChatListView();
 
     void showProgressView();

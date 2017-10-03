@@ -1,21 +1,21 @@
 package wantapp.netaq.com.wantapp.adapters;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.quickblox.chat.QBChatService;
-import com.quickblox.chat.model.QBChatMessage;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import wantapp.netaq.com.wantapp.R;
 import wantapp.netaq.com.wantapp.adapters.viewholders.ChatHolder;
+import wantapp.netaq.com.wantapp.db.models.Message;
 
 /**
  * Created by sabih on 25-Sep-17.
@@ -23,9 +23,9 @@ import wantapp.netaq.com.wantapp.adapters.viewholders.ChatHolder;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatHolder>{
 
-    private ArrayList<QBChatMessage> mDataset;
+    private List<Message> mDataset;
     private Context mContext;
-    public ChatAdapter(ArrayList<QBChatMessage> qbChatMessages) {
+    public ChatAdapter(List<Message> qbChatMessages) {
         this.mDataset = qbChatMessages;
     }
 
@@ -43,7 +43,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatHolder>{
     @Override
     public void onBindViewHolder(ChatHolder holder, int position) {
 
-        QBChatMessage qbChatMessage = mDataset.get(position);
+        Message chatMessage = mDataset.get(position);
 
         if(!isMine(position)) {
 
@@ -55,12 +55,37 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatHolder>{
 
         }
 
-        holder.chatMessage.setText(qbChatMessage.getBody());
+
+
+        holder.chatMessage.setText(chatMessage.getBody());
+        getMessageTime(chatMessage);
+
+
+
+    }
+
+    private String getMessageTime(Message chatMessage) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String time = "";
+        long dateSent = chatMessage.getDateSent();
+
+        if(DateUtils.isToday(dateSent)){
+
+            String relativeTime = DateUtils.getRelativeTimeSpanString(dateSent).toString();
+            time = relativeTime;
+        }else{
+            String formattedDate = dateFormat.format(dateSent);
+            time = formattedDate;
+
+        }
+
+        return time;
+
     }
 
     //check if current user is the recipient
     private boolean isMine(int position) {
-        if(mDataset.get(position).getRecipientId().equals(QBChatService.getInstance().getUser().getId())){
+        if(mDataset.get(position).getRecipientID()==(QBChatService.getInstance().getUser().getId())){
 
             return true;
         }

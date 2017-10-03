@@ -23,6 +23,9 @@ public class ScreenRegistrationHost extends AppCompatActivity {
     }
 
     private void initViews() {
-        NavigationController.showRegistrationFragment(getSupportFragmentManager());
+        //NavigationController.showRegistrationFragment(getSupportFragmentManager());
+
+
+        NavigationController.showLoginFragment(getSupportFragmentManager());
     }
 }
