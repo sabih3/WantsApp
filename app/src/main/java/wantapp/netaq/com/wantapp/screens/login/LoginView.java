@@ -8,4 +8,7 @@ public interface LoginView {
 
     void onPhoneNumberEmpty();
 
+    void onSignedIn();
+
+    void onSignInFailure();
 }

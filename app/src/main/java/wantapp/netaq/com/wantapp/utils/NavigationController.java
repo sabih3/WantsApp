@@ -5,11 +5,12 @@ import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 
 import wantapp.netaq.com.wantapp.R;
+import wantapp.netaq.com.wantapp.screens.MainActivity;
 import wantapp.netaq.com.wantapp.screens.chat_list.ScreenChatList;
 import wantapp.netaq.com.wantapp.screens.temp_login.TempLoginFragment;
-import wantapp.netaq.com.wantapp.screens.ScreenAddAlert;
+import wantapp.netaq.com.wantapp.screens.alerts.ScreenAddAlert;
 import wantapp.netaq.com.wantapp.screens.ScreenCreateProfile;
-import wantapp.netaq.com.wantapp.screens.ScreenNewWant;
+import wantapp.netaq.com.wantapp.screens.needs.ScreenNewWant;
 import wantapp.netaq.com.wantapp.screens.ScreenOTP;
 import wantapp.netaq.com.wantapp.screens.register.ScreenRegister;
 import wantapp.netaq.com.wantapp.screens.ScreenSignIn;
@@ -67,5 +68,10 @@ public class NavigationController {
         context.startActivity(intent);
 
 
+    }
+
+    public static void showMainScreen(Context context) {
+        Intent intent = new Intent(context,MainActivity.class);
+        context.startActivity(intent);
     }
 }

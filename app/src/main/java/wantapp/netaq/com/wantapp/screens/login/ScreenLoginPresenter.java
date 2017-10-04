@@ -14,7 +14,7 @@ public class ScreenLoginPresenter {
         this.loginView = loginView;
     }
 
-    public boolean checkIfFieldIsEmpty(String phoneNumber) {
+    public boolean SignIn(String phoneNumber) {
 
         if(phoneNumber.isEmpty()){
 
@@ -28,6 +28,22 @@ public class ScreenLoginPresenter {
 
     private void performSignIn(String phoneNumber) {
 
-        AuthBAL.signIn(phoneNumber);
+        AuthBAL.signIn(phoneNumber, new SignInListener() {
+            @Override
+            public void onSignedIn() {
+                loginView.onSignedIn();
+            }
+
+            @Override
+            public void onSignInFailure() {
+                loginView.onSignInFailure();
+            }
+        });
+    }
+
+    public interface SignInListener{
+
+        void onSignedIn();
+        void onSignInFailure();
     }
 }

@@ -15,10 +15,10 @@ import butterknife.ButterKnife;
 import wantapp.netaq.com.wantapp.R;
 import wantapp.netaq.com.wantapp.adapters.FragmentPagerAdapter;
 import wantapp.netaq.com.wantapp.models.FragmentContainer;
-import wantapp.netaq.com.wantapp.screens.AlertsList;
-import wantapp.netaq.com.wantapp.screens.ScreenWantsList;
+import wantapp.netaq.com.wantapp.screens.alerts.ScreenAlertsList;
+import wantapp.netaq.com.wantapp.screens.needs.ScreenWantsList;
 
-public class MainActivity extends AppCompatActivity implements AlertsList.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements ScreenAlertsList.OnFragmentInteractionListener{
 
     @BindView(R.id.tabs)TabLayout tabs;
     @BindView(R.id.pager)ViewPager pager;
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements AlertsList.OnFrag
     private void setTabs() {
 
         FragmentContainer wantsFragment = new FragmentContainer(ScreenWantsList.newInstance(),"Your Needs");
-        FragmentContainer needsFragment = new FragmentContainer(AlertsList.newInstance(),"Your Alerts");
+        FragmentContainer needsFragment = new FragmentContainer(ScreenAlertsList.newInstance(),"Your Alerts");
 
         ArrayList fragmentList = new ArrayList();
         fragmentList.add(wantsFragment);

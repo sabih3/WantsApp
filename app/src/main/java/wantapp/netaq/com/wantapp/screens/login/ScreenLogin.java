@@ -13,6 +13,7 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import wantapp.netaq.com.wantapp.R;
+import wantapp.netaq.com.wantapp.utils.NavigationController;
 import wantapp.netaq.com.wantapp.utils.UIUtils;
 
 
@@ -46,11 +47,21 @@ public class ScreenLogin extends Fragment implements LoginView{
         UIUtils.showSnackbar(loginParent,getResources().getString(R.string.msg_login_empty));
     }
 
+    @Override
+    public void onSignedIn() {
+        NavigationController.showMainScreen(getContext());
+    }
+
+    @Override
+    public void onSignInFailure() {
+
+    }
+
     private class LoginButtonListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
 
-            loginPresenter.checkIfFieldIsEmpty(phoneField.getText().toString().trim());
+            loginPresenter.SignIn(phoneField.getText().toString().trim());
 
         }
     }

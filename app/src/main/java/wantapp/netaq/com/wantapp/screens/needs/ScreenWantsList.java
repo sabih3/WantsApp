@@ -1,4 +1,4 @@
-package wantapp.netaq.com.wantapp.screens;
+package wantapp.netaq.com.wantapp.screens.needs;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,7 +15,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import wantapp.netaq.com.wantapp.R;
 import wantapp.netaq.com.wantapp.adapters.WantsListAdapter;
-import wantapp.netaq.com.wantapp.models.Want;
 import wantapp.netaq.com.wantapp.utils.NavigationController;
 import wantapp.netaq.com.wantapp.utils.WantsContainer;
 

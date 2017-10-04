@@ -2,6 +2,7 @@ package wantapp.netaq.com.wantapp.chat;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.widget.Toast;
 
 import com.quickblox.auth.session.QBSettings;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import wantapp.netaq.com.wantapp.eventbus.ActiveChatEvent;
 import wantapp.netaq.com.wantapp.eventbus.ChatDialogCreatedEvent;
 import wantapp.netaq.com.wantapp.utils.ChatUtils;
+import wantapp.netaq.com.wantapp.utils.QBUserHelper;
 
 /**
  * Created by sabih on 24-Sep-17.
@@ -74,8 +76,9 @@ public class ChatSessionManager {
         QBUsers.signIn(qbUser).performAsync(new QBEntityCallback<QBUser>() {
             @Override
             public void onSuccess(QBUser qbUser, Bundle bundle) {
+
                 qbUser.setId(qbUser.getId());
-                qbUser.setPassword("netaq123");
+                qbUser.setPassword(qbUser.getLogin());
                 loginChatService(qbUser,qbLoginListener);
             }
 

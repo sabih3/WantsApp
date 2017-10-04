@@ -20,7 +20,7 @@ public class ScreenLoginPresenterTest {
         LoginView  loginView = Mockito.mock(LoginView.class);
         ScreenLoginPresenter loginPresenter = new ScreenLoginPresenter(loginView);
 
-        Assert.assertTrue(loginPresenter.checkIfFieldIsEmpty(""));
+        Assert.assertTrue(loginPresenter.SignIn(""));
         verify(loginView).onPhoneNumberEmpty();
     }
 }

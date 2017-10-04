@@ -1,4 +1,4 @@
-package wantapp.netaq.com.wantapp.screens;
+package wantapp.netaq.com.wantapp.screens.needs;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import wantapp.netaq.com.wantapp.R;
 import wantapp.netaq.com.wantapp.models.Want;
+import wantapp.netaq.com.wantapp.screens.MainActivity;
 import wantapp.netaq.com.wantapp.utils.WantsContainer;
 
 public class ScreenNewWant extends AppCompatActivity {

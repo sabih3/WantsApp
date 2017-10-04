@@ -1,4 +1,4 @@
-package wantapp.netaq.com.wantapp.screens;
+package wantapp.netaq.com.wantapp.screens.alerts;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -23,10 +23,10 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".screens.ScreenNewWant" />
+        <activity android:name=".screens.needs.ScreenNewWant" />
         <activity android:name=".screens.ScreenCreateProfile" />
         <activity android:name=".screens.ScreenSignIn" />
-        <activity android:name=".screens.ScreenAddAlert" />
+        <activity android:name=".screens.alerts.ScreenAddAlert" />
         <activity
             android:name=".screens.ScreenVerifyOTP"
             android:label="@string/title_activity_screen_verify_otp"
