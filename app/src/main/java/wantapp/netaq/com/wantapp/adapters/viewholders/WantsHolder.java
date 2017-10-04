@@ -2,6 +2,7 @@ package wantapp.netaq.com.wantapp.adapters.viewholders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -15,6 +16,8 @@ import wantapp.netaq.com.wantapp.R;
 public class WantsHolder extends RecyclerView.ViewHolder{
 
     @BindView(R.id.row_want_label)public TextView wantsLabel;
+
+    @BindView(R.id.checked_ImageView)public ImageView checked;
 
     public WantsHolder(View itemView) {
         super(itemView);

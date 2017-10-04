@@ -38,6 +38,10 @@ public class WantsListAdapter extends RecyclerView.Adapter<WantsHolder>{
     public void onBindViewHolder(WantsHolder holder, int position) {
 
         holder.wantsLabel.setText(mDataset.get(position).getWant());
+
+        if(position%2 !=0){
+            holder.checked.setImageResource(R.drawable.shape_circle_green);
+        }
     }
 
     @Override
