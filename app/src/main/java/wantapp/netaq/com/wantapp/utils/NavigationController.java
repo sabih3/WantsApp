@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 
 import wantapp.netaq.com.wantapp.R;
 import wantapp.netaq.com.wantapp.screens.chat_list.ScreenChatList;
-import wantapp.netaq.com.wantapp.screens.login.LoginFragment;
+import wantapp.netaq.com.wantapp.screens.temp_login.TempLoginFragment;
 import wantapp.netaq.com.wantapp.screens.ScreenAddAlert;
 import wantapp.netaq.com.wantapp.screens.ScreenCreateProfile;
 import wantapp.netaq.com.wantapp.screens.ScreenNewWant;
@@ -58,7 +58,7 @@ public class NavigationController {
     }
 
     public static void showLoginFragment(FragmentManager supportFragmentManager) {
-        LoginFragment loginFragment = new LoginFragment();
+        TempLoginFragment loginFragment = new TempLoginFragment();
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container,loginFragment,"").commit();
     }
 

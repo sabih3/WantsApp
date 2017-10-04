@@ -31,7 +31,7 @@
             android:name=".screens.ScreenVerifyOTP"
             android:label="@string/title_activity_screen_verify_otp"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".screens.ScreenRegistrationHost">
+        <activity android:name=".screens.register.ScreenRegistrationHost">
 
              <intent-filter>
              <action android:name="android.intent.action.MAIN" />

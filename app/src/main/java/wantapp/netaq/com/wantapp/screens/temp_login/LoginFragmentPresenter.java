@@ -1,6 +1,4 @@
-package wantapp.netaq.com.wantapp.screens.login;
-
-import android.widget.Toast;
+package wantapp.netaq.com.wantapp.screens.temp_login;
 
 import com.quickblox.chat.QBChatService;
 import com.quickblox.core.exception.QBResponseException;
@@ -14,9 +12,9 @@ import wantapp.netaq.com.wantapp.utils.QBUserHelper;
 
 class LoginFragmentPresenter {
 
-    private LoginView loginViewListener;
+    private TempLoginView loginViewListener;
 
-    public LoginFragmentPresenter(LoginView loginView) {
+    public LoginFragmentPresenter(TempLoginView loginView) {
         this.loginViewListener = loginView;
     }
 

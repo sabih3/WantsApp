@@ -1,4 +1,4 @@
-package wantapp.netaq.com.wantapp.screens.login;
+package wantapp.netaq.com.wantapp.screens.temp_login;
 
 
 import android.os.Bundle;
@@ -21,7 +21,7 @@ import wantapp.netaq.com.wantapp.utils.NavigationController;
 import wantapp.netaq.com.wantapp.utils.QBUserHelper;
 
 
-public class LoginFragment extends Fragment implements View.OnClickListener,LoginView{
+public class TempLoginFragment extends Fragment implements View.OnClickListener,TempLoginView {
 
     @BindView(R.id.field_login)EditText fieldLogin;
     @BindView(R.id.field_password)EditText fieldPassword;
@@ -31,7 +31,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener,Logi
     @BindView(R.id.progress)ProgressBar progressBar;
     private LoginFragmentPresenter loginPresenter;
 
-    public LoginFragment() {
+    public TempLoginFragment() {
 
     }
 
