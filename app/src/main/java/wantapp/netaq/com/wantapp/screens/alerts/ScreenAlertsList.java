@@ -20,7 +20,7 @@ import wantapp.netaq.com.wantapp.adapters.AlertsListAdapter;
 import wantapp.netaq.com.wantapp.models.Alerts;
 import wantapp.netaq.com.wantapp.utils.NavigationController;
 
-public class ScreenAlertsList extends Fragment implements AlertsView{
+public class ScreenAlertsList extends Fragment implements AlertsView,AlertsListAdapter.AlertClickListener{
 
     @BindView(R.id.add_new_alert) FloatingActionButton addAlertButton;
     @BindView(R.id.alerts_recycler)RecyclerView alertsList;
@@ -93,6 +93,16 @@ public class ScreenAlertsList extends Fragment implements AlertsView{
         alertsList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         alertsList.setAdapter(alertsAdapter);
+
+        alertsAdapter.setListClickListener(this);
+
+
+    }
+
+    @Override
+    public void onListItemClick() {
+
+        NavigationController.showConsumerChatListScreen(getContext());
     }
 
     public interface OnFragmentInteractionListener {

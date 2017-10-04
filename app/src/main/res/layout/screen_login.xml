@@ -8,25 +8,44 @@
     android:layout_height="wrap_content">
 
 
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="15dp"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:paddingHorizontal="30dp"
+        android:background="@color/white">
 
         <EditText
             android:id="@+id/field_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="+971 54 4741150"/>
+            android:hint="54 4741150"
+            android:layout_marginBottom="10dp"/>
 
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign in"/>
+            android:text="Sign in"
+            style="@style/ButtonStyle"/>
     </LinearLayout>
 
+        <ProgressBar
+            android:id="@+id/progress"
+            android:visibility="invisible"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
 

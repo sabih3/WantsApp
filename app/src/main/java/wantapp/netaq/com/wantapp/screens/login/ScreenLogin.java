@@ -25,6 +25,7 @@ public class ScreenLogin extends Fragment implements LoginView{
     @BindView(R.id.login_parent)CoordinatorLayout loginParent;
 
     private ScreenLoginPresenter loginPresenter;
+    private View rootView;
     public ScreenLogin() {
 
     }
@@ -33,7 +34,7 @@ public class ScreenLogin extends Fragment implements LoginView{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.screen_login, container, false);
+        rootView = inflater.inflate(R.layout.screen_login, container, false);
 
         ButterKnife.bind(this,rootView);
         loginPresenter = new ScreenLoginPresenter(this);
@@ -43,24 +44,25 @@ public class ScreenLogin extends Fragment implements LoginView{
 
     @Override
     public void onPhoneNumberEmpty() {
-
+        UIUtils.hideProgress(rootView);
         UIUtils.showSnackbar(loginParent,getResources().getString(R.string.msg_login_empty));
     }
 
     @Override
     public void onSignedIn() {
+        UIUtils.hideProgress(rootView);
         NavigationController.showMainScreen(getContext());
     }
 
     @Override
     public void onSignInFailure() {
-
+        UIUtils.hideProgress(rootView);
     }
 
     private class LoginButtonListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-
+            UIUtils.showProgress(rootView);
             loginPresenter.SignIn(phoneField.getText().toString().trim());
 
         }

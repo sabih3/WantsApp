@@ -4,6 +4,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ public class ScreenRegistrationHost extends AppCompatActivity {
 
     @BindView(R.id.login_pager)ViewPager pager;
     @BindView(R.id.login_tabs)TabLayout tabs;
+    @BindView(R.id.toolbar)Toolbar toolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,11 @@ public class ScreenRegistrationHost extends AppCompatActivity {
         setContentView(R.layout.screen_registration_host);
         ButterKnife.bind(this);
         initViews();
+        setToolbar();
+    }
+
+    private void setToolbar() {
+        setSupportActionBar(toolBar);
     }
 
     private void initViews() {

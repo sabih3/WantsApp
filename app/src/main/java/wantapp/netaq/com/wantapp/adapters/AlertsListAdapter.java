@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import wantapp.netaq.com.wantapp.R;
 import wantapp.netaq.com.wantapp.adapters.viewholders.AlertListHolder;
 import wantapp.netaq.com.wantapp.models.Alerts;
+import wantapp.netaq.com.wantapp.screens.alerts.ScreenAlertsList;
 
 /**
  * Created by sabih on 04-Oct-17.
@@ -22,7 +23,12 @@ public class AlertsListAdapter extends RecyclerView.Adapter<AlertListHolder>{
 
     private ArrayList<Alerts> mDataset;
     private Context mContext;
+    private AlertClickListener alertClickListener;
 
+    public void setListClickListener(AlertClickListener alertClickListener) {
+
+        this.alertClickListener = alertClickListener;
+    }
     public AlertsListAdapter(ArrayList<Alerts> alertsList) {
         this.mDataset = alertsList;
     }
@@ -39,10 +45,25 @@ public class AlertsListAdapter extends RecyclerView.Adapter<AlertListHolder>{
     public void onBindViewHolder(AlertListHolder holder, int position) {
 
         holder.alertLabel.setText(mDataset.get(position).getName());
+
+        holder.rowParent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertClickListener.onListItemClick();
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return mDataset.size();
+    }
+
+
+
+    public interface AlertClickListener{
+
+        void onListItemClick();
     }
 }

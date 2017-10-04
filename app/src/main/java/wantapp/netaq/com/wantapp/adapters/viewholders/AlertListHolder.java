@@ -2,6 +2,7 @@ package wantapp.netaq.com.wantapp.adapters.viewholders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -15,6 +16,7 @@ import wantapp.netaq.com.wantapp.R;
 public class AlertListHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.alert_label)public TextView alertLabel;
+    @BindView(R.id.row_parent)public RelativeLayout rowParent;
 
     public AlertListHolder(View itemView) {
         super(itemView);
