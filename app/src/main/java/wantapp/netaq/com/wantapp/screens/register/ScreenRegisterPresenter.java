@@ -1,9 +1,11 @@
 package wantapp.netaq.com.wantapp.screens.register;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
 
-import wantapp.netaq.com.wantapp.utils.NavigationController;
+import wantapp.netaq.com.wantapp.bals.OTPBAL;
+import wantapp.netaq.com.wantapp.bals.responses.SMSListener;
+import wantapp.netaq.com.wantapp.utils.PreferencesManager;
+import wantapp.netaq.com.wantapp.utils.RandomInteger;
 
 /**
  * Created by sabih on 20-Sep-17.
@@ -24,14 +26,28 @@ public class ScreenRegisterPresenter {
             registerView.onRegisterParamsEmpty();
             return ;
         }else{
-            registerView.onOTPSent();
+            final int OTP = RandomInteger.generateRandomNumber();
+            OTPBAL.sendOTP(mobileNumber, OTP, new SMSListener() {
+                @Override
+                public void onSmsSent() {
+                    PreferencesManager.getInstance().setOTP(OTP);
+                    registerView.onOTPSent(OTP);
+                }
+
+                @Override
+                public void onSmsSentFailure() {
+
+                }
+
+                @Override
+                public void onRequestFailed() {
+
+                }
+            });
+
         }
 
 
     }
-
-    public void showVerificationScreen() {
-        registerView.onVerificationScreenDisplay();
-
-    }
+    
 }

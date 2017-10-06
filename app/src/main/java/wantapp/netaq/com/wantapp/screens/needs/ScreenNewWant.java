@@ -72,6 +72,7 @@ public class ScreenNewWant extends AppCompatActivity {
 
             Intent intent = new Intent(ScreenNewWant.this, MainActivity.class);
             startActivity(intent);
+            this.finish();
         }
     }
 

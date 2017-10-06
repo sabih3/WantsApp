@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -23,6 +24,7 @@ public class ScreenWantsList extends Fragment {
 
     @BindView(R.id.add_new_want)FloatingActionButton addWantButton;
     @BindView(R.id.wants_label)TextView wantsLabel;
+    @BindView(R.id.needs_empty_view)LinearLayout emptyView;
     @BindView(R.id.list_wants)RecyclerView wantsList;
 
     public ScreenWantsList() {
@@ -64,7 +66,7 @@ public class ScreenWantsList extends Fragment {
     private void setWantsList() {
 
         if(WantsContainer.wantsList.size() > 0){
-            wantsLabel.setVisibility(View.GONE);
+            emptyView.setVisibility(View.GONE);
             wantsList.setVisibility(View.VISIBLE);
 
             wantsList.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -72,7 +74,7 @@ public class ScreenWantsList extends Fragment {
 
             wantsList.setAdapter(wantsAdapter);
         }else{
-            wantsLabel.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.VISIBLE);
             wantsList.setVisibility(View.GONE);
         }
 

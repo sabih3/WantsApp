@@ -15,11 +15,11 @@ import wantapp.netaq.com.wantapp.adapters.FragmentPagerAdapter;
 import wantapp.netaq.com.wantapp.models.FragmentContainer;
 import wantapp.netaq.com.wantapp.screens.login.ScreenLogin;
 import wantapp.netaq.com.wantapp.screens.register.ScreenRegister;
+import wantapp.netaq.com.wantapp.utils.NavigationController;
 
 public class ScreenRegistrationHost extends AppCompatActivity {
 
-    @BindView(R.id.login_pager)ViewPager pager;
-    @BindView(R.id.login_tabs)TabLayout tabs;
+
     @BindView(R.id.toolbar)Toolbar toolBar;
 
     @Override
@@ -32,26 +32,13 @@ public class ScreenRegistrationHost extends AppCompatActivity {
     }
 
     private void setToolbar() {
+        toolBar.setTitle("");
         setSupportActionBar(toolBar);
     }
 
     private void initViews() {
 
-        ScreenLogin loginFragment = new ScreenLogin();
-        ScreenRegister registerFragment = new ScreenRegister();
+        NavigationController.showRegistrationHostFragment(getSupportFragmentManager());
 
-        FragmentContainer loginScreen = new FragmentContainer(loginFragment,"Login");
-        FragmentContainer registerContainer = new FragmentContainer(registerFragment,"Register");
-        ArrayList<FragmentContainer> fragmentList = new ArrayList<>();
-        fragmentList.add(loginScreen);
-        fragmentList.add(registerContainer);
-
-        FragmentPagerAdapter pagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager(),fragmentList);
-        pager.setAdapter(pagerAdapter);
-        tabs.setupWithViewPager(pager);
-        //NavigationController.showRegistrationFragment(getSupportFragmentManager());
-
-
-//        NavigationController.showLoginFragment(getSupportFragmentManager());
     }
 }

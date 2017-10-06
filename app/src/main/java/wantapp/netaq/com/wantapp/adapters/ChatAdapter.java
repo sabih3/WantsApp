@@ -46,20 +46,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatHolder>{
         Message chatMessage = mDataset.get(position);
 
         if(!isMine(position)) {
-
             //show this message right aligned
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) holder.chatMessage.getLayoutParams();
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-
             holder.chatMessage.setLayoutParams(layoutParams);
-
         }
-
-
 
         holder.chatMessage.setText(chatMessage.getBody());
         getMessageTime(chatMessage);
-
 
 
     }

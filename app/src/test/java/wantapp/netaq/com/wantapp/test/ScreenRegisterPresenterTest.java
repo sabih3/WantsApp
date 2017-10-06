@@ -22,7 +22,7 @@ public class ScreenRegisterPresenterTest {
         registerPresenter.doRegister("sabih.ahmed@netaq.ae","0544741150");
         //Assert.assertTrue(registerPresenter.doRegister("sabih.ahmed@netaq.ae","054741150"));
         //registerView.onOTPSent();
-        verify(registerView).onOTPSent();
+        verify(registerView).onOTPSent(OTP);
     }
 
     @Test
