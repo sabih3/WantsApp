@@ -13,4 +13,5 @@
     <color name="DarkGreenish">#2E8B57</color>
     <color name="black">#000000</color>
     <color name="tabs_text_color">#E8EFF9</color>
+    <color name="accent_dark">#C1CCDE</color>
 </resources>

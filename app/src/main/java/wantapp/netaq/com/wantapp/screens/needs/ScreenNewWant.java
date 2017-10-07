@@ -3,6 +3,7 @@ package wantapp.netaq.com.wantapp.screens.needs;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -18,13 +19,16 @@ import butterknife.ButterKnife;
 import wantapp.netaq.com.wantapp.R;
 import wantapp.netaq.com.wantapp.models.Want;
 import wantapp.netaq.com.wantapp.screens.MainActivity;
+import wantapp.netaq.com.wantapp.utils.ToolbarInteractionListener;
+import wantapp.netaq.com.wantapp.utils.UIUtils;
 import wantapp.netaq.com.wantapp.utils.WantsContainer;
 
-public class ScreenNewWant extends AppCompatActivity {
+public class ScreenNewWant extends AppCompatActivity implements ToolbarInteractionListener.onToolbarActions {
 
     @BindView(R.id.btn_post_want)Button btnWantPost;
     @BindView(R.id.field_want)EditText fieldWant;
-
+    @BindView(R.id.toolbar_with_logo)Toolbar toolbar;
+    @BindView(R.id.cancel_text)TextView toolbarCancel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +40,35 @@ public class ScreenNewWant extends AppCompatActivity {
     }
 
     private void initViews() {
+        setToolbar();
+        toolbarCancel.setOnClickListener(new ToolbarInteractionListener(this));
         btnWantPost.setOnClickListener(new WantPostListener());
         fieldWant.setSingleLine();
         fieldWant.setOnEditorActionListener(new WantFieldDoneButtonListener());
+    }
+
+    private void setToolbar() {
+        setSupportActionBar(UIUtils.adjustToolbar(this,toolbar));
+    }
+
+    //ToolbarInteractionListener.onToolbarActions.onToolbarCancelClick
+    @Override
+    public void onToolbarCancelClick() {
+
+        UIUtils.showMessageDialog(this,
+                "Do you really want to discard your need?",
+                "Yes",
+                "No", new UIUtils.DialogButtonListener() {
+                    @Override
+                    public void onPositiveButtonClicked() {
+                            ScreenNewWant.this.finish();
+                    }
+
+                    @Override
+                    public void onNegativeButtonClicked() {
+
+                    }
+                });
     }
 
 //    @Override

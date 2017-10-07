@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.quickblox.chat.model.QBChatDialog;
 import com.quickblox.chat.utils.DialogUtils;
+import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -82,7 +83,7 @@ public class ConsumerChatListAdapter extends RecyclerView.Adapter<ConsumerChatLi
 
         mHolder.tvName.setText(dialog.getTitle());
 
-
+        Picasso.with(mContext).load("https://randomuser.me/api/portraits/men/74.jpg").into(mHolder.userImageView);
 
         mHolder.tvName.setOnClickListener(new View.OnClickListener() {
             @Override

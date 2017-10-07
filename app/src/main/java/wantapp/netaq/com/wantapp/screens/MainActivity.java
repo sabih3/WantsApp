@@ -19,12 +19,13 @@ import wantapp.netaq.com.wantapp.adapters.FragmentPagerAdapter;
 import wantapp.netaq.com.wantapp.models.FragmentContainer;
 import wantapp.netaq.com.wantapp.screens.alerts.ScreenAlertsList;
 import wantapp.netaq.com.wantapp.screens.needs.ScreenWantsList;
+import wantapp.netaq.com.wantapp.utils.UIUtils;
 
 public class MainActivity extends AppCompatActivity implements ScreenAlertsList.OnFragmentInteractionListener{
 
     @BindView(R.id.tabs)TabLayout tabs;
     @BindView(R.id.pager)ViewPager pager;
-    @BindView(R.id.toolbar)Toolbar toolbar;
+    @BindView(R.id.toolbar_with_logo)Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +48,9 @@ public class MainActivity extends AppCompatActivity implements ScreenAlertsList.
     }
 
     private void setToolbar() {
-        toolbar.setTitleTextColor(ContextCompat.getColor(this,R.color.white));
-        setSupportActionBar(toolbar);
+
+
+        setSupportActionBar(UIUtils.adjustToolbar(MainActivity.this,toolbar));
     }
 
     private void setTabs() {

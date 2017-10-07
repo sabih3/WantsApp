@@ -2,17 +2,20 @@ package wantapp.netaq.com.wantapp.screens.chat_list;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.quickblox.chat.model.QBChatDialog;
 
@@ -33,12 +36,15 @@ import wantapp.netaq.com.wantapp.eventbus.ActiveChatEvent;
 import wantapp.netaq.com.wantapp.eventbus.ChatDialogCreatedEvent;
 import wantapp.netaq.com.wantapp.screens.chat_screen.ScreenChat;
 import wantapp.netaq.com.wantapp.utils.NavigationController;
+import wantapp.netaq.com.wantapp.utils.UIUtils;
 
 public class ScreenChatList extends AppCompatActivity implements ChatListView, ConsumerChatListAdapter.ConsumerDialogListener {
 
 
     @BindView(R.id.chat_list_consumer)RecyclerView chatListConsumer;
+    @BindView(R.id.toolbar_with_logo)Toolbar toolbar;
 
+    @BindView(R.id.chat_list_parent)CoordinatorLayout rootView;
     private ChatListPresenter chatListPresenter;
     private List<Dialog> mDialogList;
     private ConsumerChatListAdapter consumerChatListAdapter;
@@ -55,8 +61,32 @@ public class ScreenChatList extends AppCompatActivity implements ChatListView, C
 
         EventBus.getDefault().register(this);
 
-        getSupportActionBar();
+        setToolbar();
     }
+
+    private void setToolbar() {
+        setSupportActionBar(UIUtils.adjustToolbar(this,toolbar));
+    }
+    @Override
+    public void showProgressView() {
+        UIUtils.showProgress(rootView);
+    }
+
+    @Override
+    public void initializeChatList(List<Dialog> dialogsList) {
+        UIUtils.hideProgress(rootView);
+        this.mDialogList = dialogsList;
+
+
+        showChatsInList(mDialogList);
+    }
+
+
+    @Override
+    public void showNoChatListView() {
+        UIUtils.hideProgress(rootView);
+    }
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void ChatDialogCreated(ChatDialogCreatedEvent event){
@@ -125,25 +155,7 @@ public class ScreenChatList extends AppCompatActivity implements ChatListView, C
         return true;
     }
 
-    @Override
-    public void showProgressView() {
 
-    }
-
-    @Override
-    public void initializeChatList(List<Dialog> dialogsList) {
-
-        this.mDialogList = dialogsList;
-
-
-        showChatsInList(mDialogList);
-    }
-
-
-    @Override
-    public void showNoChatListView() {
-
-    }
 
 
 
