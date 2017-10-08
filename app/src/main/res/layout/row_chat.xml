@@ -1,24 +1,40 @@
-<RelativeLayout
+<FrameLayout
     android:id="@+id/parent_chat_message"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_chat_message"
+
+    <RelativeLayout
+        android:id="@+id/text_parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:autoSizeTextType="uniform"
-        android:text="Hi"
-        android:textSize="25sp"/>
+        android:paddingBottom="25dp">
 
-    <!--<TextView-->
-        <!--android:id="@+id/tv_time"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/tv_chat_message"-->
-        <!--android:layout_toRightOf="@id/tv_chat_message"-->
-        <!--android:text="02:21 PM" />-->
+        <TextView
+            android:id="@+id/tv_chat_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="15dp"
+            android:autoSizeTextType="uniform"
+            android:background="@color/colorPrimary"
+            android:padding="15dp"
+            android:text="Hi"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/chat_image"
+            android:layout_width="40dp"
+
+            android:layout_height="40dp"
+            android:layout_alignBottom="@id/tv_chat_message"
+            android:layout_alignRight="@id/tv_chat_message"
 
 
-</RelativeLayout>
+            android:src="@drawable/female_image" />
+
+    </RelativeLayout>
+
+</FrameLayout>
