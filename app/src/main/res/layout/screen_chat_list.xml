@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="wantapp.netaq.com.wantapp.screens.chat_list.ScreenChatList">
+    android:background="@color/colorAccent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,7 +21,10 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/chat_list_consumer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginHorizontal="15dp"
+            />
     </LinearLayout>
         <ProgressBar
             android:id="@+id/progress"
