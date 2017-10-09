@@ -9,6 +9,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -66,6 +69,13 @@ public class MainActivity extends AppCompatActivity implements ScreenAlertsList.
 
         pager.setAdapter(adapter);
         tabs.setupWithViewPager(pager);
+
+        LinearLayout tabLinearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
+        TextView tabContent = (TextView) tabLinearLayout.findViewById(R.id.tabContent);
+        tabContent.setText("Your Needs");
+        tabContent.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_white_24dp, 0);
+        tabs.getTabAt(0).setCustomView(tabContent);
+        tabs.getTabAt(0).setIcon(R.drawable.ic_add_white_24dp);
 
     }
 
