@@ -8,6 +8,7 @@ import com.rockerhieu.emojicon.EmojiconTextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 import wantapp.netaq.com.wantapp.R;
 
 /**
@@ -19,6 +20,7 @@ public class ConsumerChatListHolder extends RecyclerView.ViewHolder{
     @BindView(R.id.tv_last_msg)public EmojiconTextView tvLastMessage;
     @BindView(R.id.tv_name)public TextView tvName;
     @BindView(R.id.tv_unread_msg)public TextView tvUnread;
+    @BindView(R.id.user_image)public CircleImageView userImageView;
 
     public ConsumerChatListHolder(View itemView) {
         super(itemView);

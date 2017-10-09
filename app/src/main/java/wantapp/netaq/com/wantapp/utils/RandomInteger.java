@@ -7,13 +7,13 @@ import java.security.SecureRandom;
  */
 public class RandomInteger {
 
-    int range = 9;  // to generate a single number with this range, by default its 0..9
-    int length = 4; // by default length is 4
+    private static int range = 9;  // to generate a single number with this range, by default its 0..9
+    private static int length = 4; // by default length is 4
 
     public RandomInteger() {
     }
 
-    public int generateRandomNumber(){
+    public static int generateRandomNumber(){
         int randomNumber;
 
         SecureRandom secureRandom = new SecureRandom();

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="wantapp.netaq.com.wantapp.screens.alerts.ScreenAlertsList">
+    android:background="@color/colorAccent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="24dp"
             android:layout_marginBottom="24dp"
-            app:backgroundTint="#2E8B57"
+            app:backgroundTint="@color/DarkGreenish"
             android:src="@drawable/ic_add_white_24dp" />
     </RelativeLayout>
 </FrameLayout>

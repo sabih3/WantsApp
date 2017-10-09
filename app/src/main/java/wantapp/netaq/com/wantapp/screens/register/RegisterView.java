@@ -7,7 +7,6 @@ package wantapp.netaq.com.wantapp.screens.register;
 public interface RegisterView {
 
     void onRegisterParamsEmpty();
-    void onOTPSent();
+    void onOTPSent(int OTP);
 
-    void onVerificationScreenDisplay();
 }

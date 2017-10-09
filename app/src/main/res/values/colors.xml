@@ -9,5 +9,9 @@
     <color name="button_general_pressed">#dddddd</color>
     <color name="white">#fff</color>
 
-    <color name="recycler_background">#E8EFF9</color>
+    <color name="colorGreen">#3CAF84</color>
+    <color name="DarkGreenish">#2E8B57</color>
+    <color name="black">#000000</color>
+    <color name="tabs_text_color">#E8EFF9</color>
+    <color name="accent_dark">#C1CCDE</color>
 </resources>

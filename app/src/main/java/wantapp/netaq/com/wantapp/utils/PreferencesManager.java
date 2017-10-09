@@ -12,6 +12,7 @@ import com.quickblox.users.model.QBUser;
 
 public class PreferencesManager {
 
+    private static final String KEY_OTP = "OTP";
     private static PreferencesManager instance;
     private static SharedPreferences prefs;
 
@@ -69,4 +70,16 @@ public class PreferencesManager {
     }
 
 
+    public void setOTP(int otp) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(KEY_OTP,otp);
+        editor.commit();
+    }
+
+    public int getOTP() {
+        int OTP = 0;
+        OTP = prefs.getInt(KEY_OTP, 0);
+
+        return OTP;
+    }
 }

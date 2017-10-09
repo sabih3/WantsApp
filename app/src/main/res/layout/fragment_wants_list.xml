@@ -1,8 +1,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="wantapp.netaq.com.wantapp.screens.needs.ScreenWantsList">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
 <RelativeLayout
     android:layout_width="match_parent"
@@ -17,18 +17,36 @@
         android:visibility="gone">
 
     </android.support.v7.widget.RecyclerView>
+    <LinearLayout
+        android:id="@+id/needs_empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:srcCompat="@drawable/ic_needs_aman2"/>
     <TextView
         android:id="@+id/wants_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="40dp"
         android:padding="20dp"
-        android:text="I Want ......"
-        android:textSize="24sp"
-        />
+        android:text="You don't have any needs."
+        android:textSize="24sp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:textSize="18sp"
+            android:text="Press plus icon to get started"/>
+
+    </LinearLayout>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_new_want"
         android:layout_width="wrap_content"
@@ -37,7 +55,8 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="24dp"
-        android:src="@drawable/ic_add_white_24dp" />
+        android:src="@drawable/ic_add_white_24dp"
+        app:backgroundTint="@color/DarkGreenish"/>
 
 </RelativeLayout>
 </FrameLayout>

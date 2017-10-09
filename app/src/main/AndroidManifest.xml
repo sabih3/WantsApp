@@ -14,16 +14,18 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".screens.MainActivity"
-            android:launchMode="singleTop">
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar">
+             <!--<intent-filter>-->
+             <!--<action android:name="android.intent.action.MAIN" />-->
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+             <!--<category android:name="android.intent.category.LAUNCHER" />-->
+             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".screens.needs.ScreenNewWant" />
+        <activity android:name=".screens.needs.ScreenNewWant"
+                  android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".screens.ScreenCreateProfile" />
         <activity android:name=".screens.ScreenSignIn" />
         <activity android:name=".screens.alerts.ScreenAddAlert" />
@@ -33,15 +35,14 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".screens.register.ScreenRegistrationHost"
             android:theme="@style/AppTheme.NoActionBar">
-
              <intent-filter>
              <action android:name="android.intent.action.MAIN" />
-
-
              <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter> 
+             </intent-filter>
         </activity>
-        <activity android:name=".screens.chat_list.ScreenChatList">
+        <activity android:name=".screens.chat_list.ScreenChatList"
+                  android:theme="@style/AppTheme.NoActionBar">
+
 
         </activity>
         <activity android:name=".screens.chat_screen.ScreenChat" />

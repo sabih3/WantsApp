@@ -7,11 +7,12 @@ import android.support.v4.app.FragmentManager;
 import wantapp.netaq.com.wantapp.R;
 import wantapp.netaq.com.wantapp.screens.MainActivity;
 import wantapp.netaq.com.wantapp.screens.chat_list.ScreenChatList;
+import wantapp.netaq.com.wantapp.screens.register.RegistrationHostFragment;
 import wantapp.netaq.com.wantapp.screens.temp_login.TempLoginFragment;
 import wantapp.netaq.com.wantapp.screens.alerts.ScreenAddAlert;
 import wantapp.netaq.com.wantapp.screens.ScreenCreateProfile;
 import wantapp.netaq.com.wantapp.screens.needs.ScreenNewWant;
-import wantapp.netaq.com.wantapp.screens.ScreenOTP;
+import wantapp.netaq.com.wantapp.screens.otp.ScreenOTP;
 import wantapp.netaq.com.wantapp.screens.register.ScreenRegister;
 import wantapp.netaq.com.wantapp.screens.ScreenSignIn;
 
@@ -73,5 +74,10 @@ public class NavigationController {
     public static void showMainScreen(Context context) {
         Intent intent = new Intent(context,MainActivity.class);
         context.startActivity(intent);
+    }
+
+    public static void showRegistrationHostFragment(FragmentManager supportFragmentManager) {
+        RegistrationHostFragment registerHost = new RegistrationHostFragment();
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,registerHost,"").commit();
     }
 }

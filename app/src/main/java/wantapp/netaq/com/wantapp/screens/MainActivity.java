@@ -3,10 +3,12 @@ package wantapp.netaq.com.wantapp.screens;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
 
@@ -17,11 +19,13 @@ import wantapp.netaq.com.wantapp.adapters.FragmentPagerAdapter;
 import wantapp.netaq.com.wantapp.models.FragmentContainer;
 import wantapp.netaq.com.wantapp.screens.alerts.ScreenAlertsList;
 import wantapp.netaq.com.wantapp.screens.needs.ScreenWantsList;
+import wantapp.netaq.com.wantapp.utils.UIUtils;
 
 public class MainActivity extends AppCompatActivity implements ScreenAlertsList.OnFragmentInteractionListener{
 
     @BindView(R.id.tabs)TabLayout tabs;
     @BindView(R.id.pager)ViewPager pager;
+    @BindView(R.id.toolbar_with_logo)Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,14 @@ public class MainActivity extends AppCompatActivity implements ScreenAlertsList.
     }
 
     private void initViews() {
+        setToolbar();
         setTabs();
+    }
+
+    private void setToolbar() {
+
+
+        setSupportActionBar(UIUtils.adjustToolbar(MainActivity.this,toolbar));
     }
 
     private void setTabs() {
