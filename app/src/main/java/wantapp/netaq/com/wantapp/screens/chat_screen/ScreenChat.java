@@ -1,9 +1,11 @@
 package wantapp.netaq.com.wantapp.screens.chat_screen;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,12 +32,15 @@ import wantapp.netaq.com.wantapp.db.models.Dialog;
 import wantapp.netaq.com.wantapp.eventbus.ActiveChatEvent;
 import wantapp.netaq.com.wantapp.db.models.Message;
 import wantapp.netaq.com.wantapp.utils.NavigationController;
+import wantapp.netaq.com.wantapp.utils.PreferencesManager;
+import wantapp.netaq.com.wantapp.utils.UIUtils;
 
 public class ScreenChat extends AppCompatActivity {
 
     @BindView(R.id.chat_list)RecyclerView chatList;
     @BindView(R.id.messgae_editor)EditText chatEditor;
     @BindView(R.id.send_button) ImageView btnSend;
+    @BindView(R.id.toolbar_with_logo)Toolbar toolbar;
     private ChatAdapter adapter;
 
     private QBChatDialog qbChatDialog;
@@ -49,22 +54,43 @@ public class ScreenChat extends AppCompatActivity {
 
         EventBus.getDefault().register(this);
 
+
         qbChatDialog = (QBChatDialog) getIntent().getSerializableExtra(NavigationController.EXTRA_DIALOG);
         qbChatDialog.initForChat(QBChatService.getInstance());
         dialog = MessageDataManager.getLocalDialog(qbChatDialog);
 
-        QBRequestGetBuilder requestBuilder = new QBRequestGetBuilder();
-        requestBuilder.setLimit(100);
+        PreferencesManager.getInstance().setActiveDialogID(qbChatDialog.getDialogId());
+
+        initToolbar();
 
         btnSend.setOnClickListener(new SendButtonListener());
 
         chatMessagesList = MessageDataManager.getAllMessages(dialog);
+
 
         adapter = new ChatAdapter(chatMessagesList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ScreenChat.this);
         linearLayoutManager.setStackFromEnd(true);
         chatList.setLayoutManager(linearLayoutManager);
         chatList.setAdapter(adapter);
+
+        PreferencesManager.getInstance().setChatIsActive(true);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        PreferencesManager.getInstance().setChatIsActive(false);
+    }
+
+    private void initToolbar() {
+
+
+        String title = dialog.getTitle();
+
+        setSupportActionBar(UIUtils.adjustToolbar(this,toolbar,title));
+
     }
 
     private class SendButtonListener implements View.OnClickListener {
@@ -113,16 +139,23 @@ public class ScreenChat extends AppCompatActivity {
         }
     }
 
+
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onActiveChatProcess(ActiveChatEvent activeChatEvent){
-        Message persistedMessage = MessageDataManager.persistChatMessage(dialog, activeChatEvent.getQbChatMessage());
-        chatMessagesList.add(chatMessagesList.size(),persistedMessage);
-        adapter.notifyItemInserted(chatMessagesList.size());
-        chatList.smoothScrollToPosition(adapter.getItemCount());
+        if(qbChatDialog.getDialogId().equals(activeChatEvent.getDialogID())){
+            Message persistedMessage = MessageDataManager.persistChatMessage(dialog, activeChatEvent.getQbChatMessage());
+            chatMessagesList.add(chatMessagesList.size(),persistedMessage);
+            adapter.notifyItemInserted(chatMessagesList.size());
+            chatList.smoothScrollToPosition(adapter.getItemCount());
+        }
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
+        PreferencesManager.getInstance().setActiveDialogID("");
     }
 }

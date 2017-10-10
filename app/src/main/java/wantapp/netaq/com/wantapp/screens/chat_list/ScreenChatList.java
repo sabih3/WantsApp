@@ -15,7 +15,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 
 import com.quickblox.chat.model.QBChatDialog;
 
@@ -23,7 +22,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -64,8 +62,15 @@ public class ScreenChatList extends AppCompatActivity implements ChatListView, C
         setToolbar();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+
     private void setToolbar() {
-        setSupportActionBar(UIUtils.adjustToolbar(this,toolbar));
+        setSupportActionBar(UIUtils.adjustToolbar(this,toolbar,""));
     }
     @Override
     public void showProgressView() {
@@ -88,10 +93,12 @@ public class ScreenChatList extends AppCompatActivity implements ChatListView, C
     }
 
 
+    //ChatSessionManager.createChat
+    //this is triggered when app user creates chat with other user
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void ChatDialogCreated(ChatDialogCreatedEvent event){
         //do this after receiving event
-        DialogDataManager.persistNewDialog(event.getChatDialog());
+        DialogDataManager.persistNewCreatedDialog(event.getChatDialog());
         chatListPresenter.checkUserHasPastChats();
     }
 

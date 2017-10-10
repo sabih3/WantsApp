@@ -45,7 +45,8 @@
 
 
         </activity>
-        <activity android:name=".screens.chat_screen.ScreenChat" />
+        <activity android:name=".screens.chat_screen.ScreenChat"
+                  android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

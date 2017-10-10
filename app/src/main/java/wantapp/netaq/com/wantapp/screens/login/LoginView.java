@@ -10,5 +10,5 @@ public interface LoginView {
 
     void onSignedIn();
 
-    void onSignInFailure();
+    void onSignInFailure(String exception);
 }

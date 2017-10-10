@@ -55,6 +55,21 @@ public class MessageDataManager {
         return dialog;
     }
 
+    public static Dialog getLocalDialog(String qbChatDialogID){
+        Dialog dialog = null;
+
+        try {
+            Dao<Dialog, Integer> dialogDAO = DialogDataManager.getDialogDAO();
+            QueryBuilder<Dialog, Integer> queryBuilder = dialogDAO.queryBuilder();
+            queryBuilder.where().eq(Dialog.Column.ID, qbChatDialogID);
+            PreparedQuery<Dialog> preparedQuery = queryBuilder.prepare();
+            dialog = dialogDAO.queryForFirst(preparedQuery);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dialog;
+    }
+
     public static Message persistChatMessage(Dialog dialog, QBChatMessage chatMessage){
         Dialog Localdialog = dialog;
 
@@ -98,5 +113,10 @@ public class MessageDataManager {
         }
 
         return lastMessage;
+    }
+
+    public static void createLocalDialog(String qbChatDialogID){
+        Dialog dialog = new Dialog();
+
     }
 }

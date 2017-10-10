@@ -2,6 +2,7 @@ package wantapp.netaq.com.wantapp.db.managers;
 
 import com.j256.ormlite.dao.Dao;
 import com.quickblox.chat.model.QBChatDialog;
+import com.quickblox.chat.model.QBChatMessage;
 import com.quickblox.chat.model.QBDialogType;
 
 import java.sql.SQLException;
@@ -73,7 +74,8 @@ public class DialogDataManager {
         return freshPersistedDialogs;
     }
 
-    public static void persistNewDialog(QBChatDialog chatDialog) {
+
+    public static void persistNewCreatedDialog(QBChatDialog chatDialog) {
         DatabaseHelper databaseHelper = DBManager.getInstance().getDatabaseHelper();
 
         Dialog dialog = new Dialog();
@@ -99,4 +101,6 @@ public class DialogDataManager {
             e.printStackTrace();
         }
     }
+
+
 }

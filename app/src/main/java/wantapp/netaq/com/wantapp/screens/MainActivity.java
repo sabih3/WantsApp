@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements ScreenAlertsList.
     private void setToolbar() {
 
 
-        setSupportActionBar(UIUtils.adjustToolbar(MainActivity.this,toolbar));
+        setSupportActionBar(UIUtils.adjustToolbar(MainActivity.this,toolbar,""));
     }
 
     private void setTabs() {

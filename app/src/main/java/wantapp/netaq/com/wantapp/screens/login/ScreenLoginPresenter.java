@@ -35,8 +35,8 @@ public class ScreenLoginPresenter {
             }
 
             @Override
-            public void onSignInFailure() {
-                loginView.onSignInFailure();
+            public void onSignInFailure(String exception) {
+                loginView.onSignInFailure(exception);
             }
         });
     }
@@ -44,6 +44,6 @@ public class ScreenLoginPresenter {
     public interface SignInListener{
 
         void onSignedIn();
-        void onSignInFailure();
+        void onSignInFailure(String s);
     }
 }

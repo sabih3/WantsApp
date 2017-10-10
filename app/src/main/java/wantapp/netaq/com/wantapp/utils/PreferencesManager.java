@@ -13,6 +13,8 @@ import com.quickblox.users.model.QBUser;
 public class PreferencesManager {
 
     private static final String KEY_OTP = "OTP";
+    private static final String KEY_CHAT_ACTIVE = "KEY_CHAT_ACTIVE";
+    private static final String KEY_ACTIVE_DIALOG_ID = "ACTIVE_DIALOG_ID";
     private static PreferencesManager instance;
     private static SharedPreferences prefs;
 
@@ -81,5 +83,27 @@ public class PreferencesManager {
         OTP = prefs.getInt(KEY_OTP, 0);
 
         return OTP;
+    }
+
+    public void setChatIsActive(boolean isChatActive) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(KEY_CHAT_ACTIVE,isChatActive);
+        editor.commit();
+    }
+
+    public boolean isChatActive(){
+        return  prefs.getBoolean(KEY_CHAT_ACTIVE, false);
+    }
+
+
+    public void setActiveDialogID(String dialogId) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(KEY_ACTIVE_DIALOG_ID,dialogId);
+        editor.commit();
+    }
+
+    public String getActiveDialogID() {
+
+        return prefs.getString(KEY_ACTIVE_DIALOG_ID,"");
     }
 }

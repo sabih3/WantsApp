@@ -30,7 +30,7 @@ public class AuthBAL {
 
             @Override
             public void onChatLoginFailure(QBResponseException e) {
-                signInListener.onSignInFailure();
+                signInListener.onSignInFailure(e.toString());
             }
         });
     }

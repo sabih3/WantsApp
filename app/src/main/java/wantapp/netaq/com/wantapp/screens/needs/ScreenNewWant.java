@@ -48,7 +48,7 @@ public class ScreenNewWant extends AppCompatActivity implements ToolbarInteracti
     }
 
     private void setToolbar() {
-        setSupportActionBar(UIUtils.adjustToolbar(this,toolbar));
+        setSupportActionBar(UIUtils.adjustToolbar(this,toolbar,""));
     }
 
     //ToolbarInteractionListener.onToolbarActions.onToolbarCancelClick

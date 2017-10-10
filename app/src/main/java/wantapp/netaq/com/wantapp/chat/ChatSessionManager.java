@@ -26,9 +26,15 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 
+import wantapp.netaq.com.wantapp.db.managers.DialogDataManager;
+import wantapp.netaq.com.wantapp.db.managers.MessageDataManager;
+import wantapp.netaq.com.wantapp.db.models.Dialog;
 import wantapp.netaq.com.wantapp.eventbus.ActiveChatEvent;
 import wantapp.netaq.com.wantapp.eventbus.ChatDialogCreatedEvent;
 import wantapp.netaq.com.wantapp.utils.ChatUtils;
+import wantapp.netaq.com.wantapp.utils.NavigationController;
+import wantapp.netaq.com.wantapp.utils.NotificationHelper;
+import wantapp.netaq.com.wantapp.utils.PreferencesManager;
 import wantapp.netaq.com.wantapp.utils.QBUserHelper;
 
 /**
@@ -107,9 +113,51 @@ public class ChatSessionManager {
                 QBIncomingMessagesManager incomingMessagesManager = chatService.getIncomingMessagesManager();
                 incomingMessagesManager.addDialogMessageListener(new QBChatDialogMessageListener() {
                     @Override
-                    public void processMessage(String s, QBChatMessage qbChatMessage, Integer integer) {
-                        EventBus.getDefault().post(new ActiveChatEvent(s,qbChatMessage,integer));
-                        //NotificationHelper.notify(context,qbChatMessage.getBody(),"");
+                    public void processMessage(final String dialogID, final QBChatMessage qbChatMessage, final Integer integer) {
+                        Dialog localDialog = MessageDataManager.getLocalDialog(dialogID);
+
+                        if(localDialog != null){
+
+                            MessageDataManager.persistChatMessage(localDialog, qbChatMessage);
+                            EventBus.getDefault().post(new ActiveChatEvent(dialogID,qbChatMessage,integer));
+
+                            if(!PreferencesManager.getInstance().getActiveDialogID().equals(qbChatMessage.getDialogId()) ){
+                                //notify
+                                NotificationHelper.issueNotification(context,localDialog,qbChatMessage.getBody());
+
+                            }
+
+                        }else{
+                            QBRestChatService.getChatDialogById(dialogID).performAsync(
+                                    new QBEntityCallback<QBChatDialog>() {
+                                        @Override
+                                        public void onSuccess(QBChatDialog dialog, Bundle params) {
+                                            DialogDataManager.persistNewCreatedDialog(dialog);
+
+                                            Dialog newlyCreatedDialog = MessageDataManager.getLocalDialog(dialog.getDialogId());
+
+                                            MessageDataManager.persistChatMessage(newlyCreatedDialog, qbChatMessage);
+
+                                            EventBus.getDefault().post(new ActiveChatEvent(newlyCreatedDialog.getDialogId(),qbChatMessage,integer));
+                                            //notify
+                                            NotificationHelper.issueNotification(context,newlyCreatedDialog,qbChatMessage.getBody());
+
+
+
+                                        }
+
+                                        @Override
+                                        public void onError(QBResponseException responseException) {
+
+                                        }
+                                    });
+                        }
+
+
+
+
+
+
                     }
 
                     @Override

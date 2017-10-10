@@ -55,8 +55,9 @@ public class ScreenLogin extends Fragment implements LoginView{
     }
 
     @Override
-    public void onSignInFailure() {
+    public void onSignInFailure(String exception) {
         UIUtils.hideProgress(rootView);
+        UIUtils.showSnackbar(loginParent,exception);
     }
 
     private class LoginButtonListener implements View.OnClickListener {
