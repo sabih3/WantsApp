@@ -183,6 +183,7 @@ public class ChatSessionManager {
         //or just use DialogUtils
         //for creating PRIVATE dialog
         QBChatDialog dialog = DialogUtils.buildPrivateDialog(participantID);
+
         if(!QBChatService.getInstance().isLoggedIn()){
 
             Toast.makeText(context, "Chat Service Not Logged In", Toast.LENGTH_SHORT).show();

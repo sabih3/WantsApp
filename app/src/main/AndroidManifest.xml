@@ -46,6 +46,7 @@
 
         </activity>
         <activity android:name=".screens.chat_screen.ScreenChat"
+                  android:launchMode="singleInstance"
                   android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
