@@ -44,8 +44,8 @@ public class RegistrationHostFragment extends Fragment {
         ScreenLogin loginFragment = new ScreenLogin();
         ScreenRegister registerFragment = new ScreenRegister();
 
-        FragmentContainer loginScreen = new FragmentContainer(loginFragment,"Login");
-        FragmentContainer registerContainer = new FragmentContainer(registerFragment,"Register");
+        FragmentContainer loginScreen = new FragmentContainer(loginFragment, "Login");
+        FragmentContainer registerContainer = new FragmentContainer(registerFragment, "Register");
         ArrayList<FragmentContainer> fragmentList = new ArrayList<>();
         fragmentList.add(loginScreen);
         fragmentList.add(registerContainer);

@@ -6,11 +6,9 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.quickblox.chat.QBChatService;
-import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -19,7 +17,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import wantapp.netaq.com.wantapp.R;
-import wantapp.netaq.com.wantapp.adapters.viewholders.ChatHolder;
 import wantapp.netaq.com.wantapp.db.models.Message;
 
 /**

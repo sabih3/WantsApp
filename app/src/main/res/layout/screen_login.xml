@@ -2,13 +2,9 @@
 <android.support.design.widget.CoordinatorLayout
     android:id="@+id/login_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-
-
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,6 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="54 4741150"
+            android:maxLines="1"
+            android:inputType="phone"
             android:layout_marginBottom="10dp"/>
 
         <Button

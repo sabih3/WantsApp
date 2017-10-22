@@ -2,17 +2,43 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/row_parent"
+    android:background="@android:color/white"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
 
     <TextView
         android:id="@+id/alert_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="3 people are looking for books"
-        android:textSize="25sp"
-        android:paddingVertical="10dp"
-        android:padding="10dp"
-        android:background="@android:color/white"
-        android:layout_marginBottom="5dp"/>
+        android:text="People are looking"
+        android:textSize="18sp"
+        android:layout_margin="15dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/circle_layout" />
+
+    <RelativeLayout
+        android:id="@+id/circle_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:layout_centerVertical="true">
+        <ImageView
+            android:id="@+id/checked_ImageView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/shape_circle_grey"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="0"
+            android:textSize="16sp"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
 </RelativeLayout>
