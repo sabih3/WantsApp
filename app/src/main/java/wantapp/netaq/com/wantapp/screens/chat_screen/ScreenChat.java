@@ -9,12 +9,16 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.quickblox.chat.QBChatService;
+import com.quickblox.chat.listeners.QBChatDialogTypingListener;
 import com.quickblox.chat.model.QBChatDialog;
 import com.quickblox.chat.model.QBChatMessage;
 import com.quickblox.core.QBEntityCallback;
@@ -24,11 +28,14 @@ import com.quickblox.core.request.QBRequestGetBuilder;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.jivesoftware.smack.SmackException;
+import org.jivesoftware.smack.XMPPException;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pl.droidsonroids.gif.GifImageView;
 import wantapp.netaq.com.wantapp.R;
 import wantapp.netaq.com.wantapp.adapters.ChatAdapter;
 import wantapp.netaq.com.wantapp.db.managers.MessageDataManager;
@@ -45,11 +52,14 @@ public class ScreenChat extends AppCompatActivity {
     @BindView(R.id.messgae_editor)EditText chatEditor;
     @BindView(R.id.send_button) ImageView btnSend;
     @BindView(R.id.toolbar_with_logo)Toolbar toolbar;
-    private ChatAdapter adapter;
+    @BindView(R.id.typing_status)GifImageView typingGIF;
 
+    private ChatAdapter adapter;
     private QBChatDialog qbChatDialog;
     private Dialog dialog;
     private List<Message> chatMessagesList;
+    private boolean typingStarted;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,14 +81,15 @@ public class ScreenChat extends AppCompatActivity {
 
         chatMessagesList = MessageDataManager.getAllMessages(dialog);
 
-
         adapter = new ChatAdapter(chatMessagesList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ScreenChat.this);
         linearLayoutManager.setStackFromEnd(true);
         chatList.setLayoutManager(linearLayoutManager);
         chatList.setAdapter(adapter);
-
         PreferencesManager.getInstance().setChatIsActive(true);
+        chatEditor.addTextChangedListener(new ChatTypingWatcher());
+
+        qbChatDialog.addIsTypingListener(new OpponentUserTypingListener());
     }
 
     @Override
@@ -168,4 +179,64 @@ public class ScreenChat extends AppCompatActivity {
         EventBus.getDefault().unregister(this);
         PreferencesManager.getInstance().setActiveDialogID("");
     }
+
+    private class ChatTypingWatcher implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editText) {
+            if (!TextUtils.isEmpty(editText.toString()) && editText.toString().trim().length() == 1) {
+
+                //Log.i(TAG, “typing started event…”);
+                typingStarted = true;
+
+                sendTypingStatus(typingStarted);
+
+            } else if (editText.toString().trim().length() == 0 && typingStarted) {
+
+                //Log.i(TAG, “typing stopped event…”);
+                typingStarted = false;
+                sendTypingStatus(typingStarted);
+
+            }
+
+        }
+    }
+
+    private void sendTypingStatus(boolean typingStarted) {
+        if(typingStarted){
+            try {
+                qbChatDialog.sendIsTypingNotification();
+            } catch (XMPPException | SmackException.NotConnectedException e) {
+                e.printStackTrace();
+            }
+        }else{
+            try {
+                qbChatDialog.sendStopTypingNotification();
+            } catch (XMPPException | SmackException.NotConnectedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class OpponentUserTypingListener implements QBChatDialogTypingListener {
+        @Override
+        public void processUserIsTyping(String s, Integer integer) {
+            typingGIF.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        public void processUserStopTyping(String s, Integer integer) {
+            typingGIF.setVisibility(View.GONE);
+        }
+    }
 }
+

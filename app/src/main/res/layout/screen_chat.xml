@@ -59,6 +59,13 @@
                         android:layout_marginBottom="15dp"
                         android:layout_alignBottom="@id/messgae_editor"/>
         </RelativeLayout>
-
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/typing_status"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            android:layout_above="@id/text_layout"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/typing2"
+            android:visibility="gone"/>
     </RelativeLayout>
 </LinearLayout>
