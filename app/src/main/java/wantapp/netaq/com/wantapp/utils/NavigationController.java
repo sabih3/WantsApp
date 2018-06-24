@@ -80,4 +80,8 @@ public class NavigationController {
         RegistrationHostFragment registerHost = new RegistrationHostFragment();
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container,registerHost,"").commit();
     }
+
+    public static void showChatScreen() {
+
+    }
 }

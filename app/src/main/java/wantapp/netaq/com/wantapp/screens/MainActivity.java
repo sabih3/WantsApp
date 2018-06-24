@@ -3,7 +3,6 @@ package wantapp.netaq.com.wantapp.screens;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -53,13 +52,15 @@ public class MainActivity extends AppCompatActivity implements ScreenAlertsList.
     private void setToolbar() {
 
 
-        setSupportActionBar(UIUtils.adjustToolbar(MainActivity.this,toolbar));
+        setSupportActionBar(UIUtils.adjustToolbar(MainActivity.this,toolbar,""));
     }
 
     private void setTabs() {
 
-        FragmentContainer wantsFragment = new FragmentContainer(ScreenWantsList.newInstance(),"Your Needs");
-        FragmentContainer needsFragment = new FragmentContainer(ScreenAlertsList.newInstance(),"Your Alerts");
+        String[] titles = {"Your Needs" , "Your Alerts"};
+
+        FragmentContainer wantsFragment = new FragmentContainer(ScreenWantsList.newInstance(), "Your Needs");
+        FragmentContainer needsFragment = new FragmentContainer(ScreenAlertsList.newInstance(), "Your Alerts");
 
         ArrayList fragmentList = new ArrayList();
         fragmentList.add(wantsFragment);

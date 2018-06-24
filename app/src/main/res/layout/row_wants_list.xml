@@ -4,37 +4,40 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:layout_margin="10dp">
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
 
-    <TextView
-        android:id="@+id/row_want_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="I want a plumber"
-        android:textSize="22sp"
-        android:layout_margin="10dp"
-        android:paddingVertical="10dp"
-        android:layout_alignParentRight="true" />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_margin="10dp"
-        android:layout_centerVertical="true">
-        <ImageView
-            android:id="@+id/checked_ImageView"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/shape_circle_grey"
-            />
         <TextView
+            android:id="@+id/row_want_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I want a plumber"
+            android:textSize="18sp"
+            android:layout_centerVertical="true"
+            android:layout_margin="15dp"
+            android:layout_toLeftOf="@id/circle_layout"/>
+
+        <RelativeLayout
+            android:id="@+id/circle_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:text="0"
-            android:textSize="16sp"
-            android:layout_centerInParent="true"/>
-    </RelativeLayout>
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_centerVertical="true">
+                <ImageView
+                    android:id="@+id/checked_ImageView"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/shape_circle_grey"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:text="0"
+                    android:textSize="16sp"
+                    android:layout_centerInParent="true"/>
+        </RelativeLayout>
 </RelativeLayout>

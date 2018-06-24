@@ -6,6 +6,8 @@ import com.quickblox.chat.model.QBChatMessage;
  * Created by sabih on 26-Sep-17.
  */
 
+
+//For already on going chat or previous chat
 public class ActiveChatEvent {
 
     private final String dialogID;

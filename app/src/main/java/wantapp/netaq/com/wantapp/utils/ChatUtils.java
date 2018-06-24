@@ -4,6 +4,7 @@ import com.quickblox.chat.QBChatService;
 import com.quickblox.chat.model.QBChatDialog;
 import com.quickblox.chat.model.QBChatMessage;
 import com.quickblox.chat.model.QBDialogType;
+import com.quickblox.chat.utils.DialogUtils;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -36,4 +36,6 @@ public class FragmentPagerAdapter extends FragmentStatePagerAdapter{
     public CharSequence getPageTitle(int position) {
         return mDataset.get(position).getFragmentTitle();
     }
+
+
 }

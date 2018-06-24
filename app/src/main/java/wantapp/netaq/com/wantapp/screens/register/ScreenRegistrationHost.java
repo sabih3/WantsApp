@@ -20,7 +20,6 @@ import wantapp.netaq.com.wantapp.utils.NavigationController;
 public class ScreenRegistrationHost extends AppCompatActivity {
 
 
-    @BindView(R.id.toolbar)Toolbar toolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +27,6 @@ public class ScreenRegistrationHost extends AppCompatActivity {
         setContentView(R.layout.screen_registration_host);
         ButterKnife.bind(this);
         initViews();
-        setToolbar();
-    }
-
-    private void setToolbar() {
-        toolBar.setTitle("");
-        setSupportActionBar(toolBar);
     }
 
     private void initViews() {

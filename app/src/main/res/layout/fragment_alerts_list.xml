@@ -1,31 +1,78 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorAccent">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+    >
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/alerts_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="10dp"/>
+            android:clipToPadding="false"
+            android:visibility="visible">
+        </android.support.v7.widget.RecyclerView>
 
-            <android.support.design.widget.FloatingActionButton
-            android:id="@+id/add_new_alert"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="24dp"
-            android:layout_marginBottom="24dp"
-            app:backgroundTint="@color/DarkGreenish"
-            android:src="@drawable/ic_add_white_24dp" />
-    </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/alerts_empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="40dp"
+                    app:srcCompat="@drawable/ic_alert_bell"/>
+                <TextView
+                    android:id="@+id/alerts_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:text="You don't have any alerts."
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:textSize="18sp"
+                    android:text="Press plus icon to get started"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:gravity="center|bottom"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="30dp"
+                    android:paddingTop="30dp"
+                    android:paddingLeft="30dp"
+                    android:paddingStart="30dp"
+                    app:srcCompat="@drawable/ic_arrow" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_new_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="24dp"
+        android:layout_marginRight="24dp"
+        android:src="@drawable/ic_add_white_24dp"
+        app:backgroundTint="@color/DarkGreenish" />
 </FrameLayout>

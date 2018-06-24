@@ -1,53 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/colorAccent">
 
+        <include layout="@layout/toolbar_logo"/>
+
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="15dp">
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/chat_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/message_editor_layout"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/chat_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/text_layout"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentTop="true">
 
-            >
-        </android.support.v7.widget.RecyclerView>
+            </android.support.v7.widget.RecyclerView>
+
+
 
         <RelativeLayout
-            android:id="@+id/message_editor_layout"
+            android:id="@+id/text_layout"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/white"
+            android:layout_alignParentBottom="true">
 
-            <EditText
-                android:id="@+id/messgae_editor"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:imeOptions="actionGo"
-                android:hint="Write a message"
-                android:paddingHorizontal="10dp"
-                android:layout_marginRight="40dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                <EditText
+                    android:id="@+id/messgae_editor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionGo"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="45dp"
+                    android:layout_marginRight="45dp"
+                    android:hint="Write a message"/>
 
-            <ImageView
-                android:id="@+id/send_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_send_black_24px"
-                android:layout_alignParentRight="true"
-                />
+                    <ImageView
+                        android:id="@+id/send_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_send"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_alignBottom="@id/messgae_editor"/>
         </RelativeLayout>
-
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/typing_status"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            android:layout_above="@id/text_layout"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/typing2"
+            android:visibility="gone"/>
     </RelativeLayout>
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

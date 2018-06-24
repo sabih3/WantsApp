@@ -10,10 +10,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import wantapp.netaq.com.wantapp.R;
 import wantapp.netaq.com.wantapp.screens.MainActivity;
 import wantapp.netaq.com.wantapp.screens.chat_list.ScreenChatList;
+import wantapp.netaq.com.wantapp.screens.chat_screen.ScreenChat;
 import wantapp.netaq.com.wantapp.screens.needs.ScreenNewWant;
 
 /**
@@ -47,23 +49,32 @@ public class UIUtils {
 
     }
 
-    public static Toolbar adjustToolbar(Context context, Toolbar toolbar) {
+    public static Toolbar adjustToolbar(Context context, Toolbar toolbar,String title) {
 
         Toolbar processedToolbar = toolbar;
         processedToolbar.setTitle("");
         if(context instanceof MainActivity){
-
-            processedToolbar.findViewById(R.id.back_icon).setVisibility(View.INVISIBLE);
-            processedToolbar.findViewById(R.id.cancel_text).setVisibility(View.INVISIBLE);
+            processedToolbar.findViewById(R.id.toolbar_title).setVisibility(View.GONE);
+            processedToolbar.findViewById(R.id.back_icon).setVisibility(View.GONE);
+            processedToolbar.findViewById(R.id.cancel_text).setVisibility(View.GONE);
 
         }
 
         if(context instanceof ScreenNewWant){
+            processedToolbar.findViewById(R.id.toolbar_title).setVisibility(View.GONE);
             processedToolbar.findViewById(R.id.back_icon).setVisibility(View.INVISIBLE);
         }
 
         if(context instanceof ScreenChatList){
+            processedToolbar.findViewById(R.id.toolbar_title).setVisibility(View.GONE);
             processedToolbar.findViewById(R.id.cancel_text).setVisibility(View.INVISIBLE);
+        }
+
+        if(context instanceof ScreenChat){
+            TextView toolbatTitleView = (TextView) processedToolbar.findViewById(R.id.toolbar_title);
+            toolbatTitleView.setText(title);
+            processedToolbar.findViewById(R.id.app_logo).setVisibility(View.GONE);
+            processedToolbar.findViewById(R.id.cancel_text).setVisibility(View.GONE);
         }
 
         return processedToolbar;
