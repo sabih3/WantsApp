@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.widget.Toast;
 
+import com.quickblox.auth.QBAuth;
 import com.quickblox.auth.session.QBSettings;
 import com.quickblox.chat.QBChatService;
 import com.quickblox.chat.QBIncomingMessagesManager;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 import wantapp.netaq.com.wantapp.eventbus.ActiveChatEvent;
 import wantapp.netaq.com.wantapp.eventbus.ChatDialogCreatedEvent;
 import wantapp.netaq.com.wantapp.utils.ChatUtils;
+import wantapp.netaq.com.wantapp.utils.NotificationHelper;
 import wantapp.netaq.com.wantapp.utils.QBUserHelper;
 
 /**
@@ -70,6 +72,8 @@ public class ChatSessionManager {
         QBSettings.getInstance().init(context, APP_ID, AUTH_KEY, AUTH_SECRET);
         QBSettings.getInstance().setAccountKey(ACCOUNT_KEY);
 
+
+        QBAuth.createSession();
     }
 
     public boolean login(QBUser qbUser, final QBLoginListener qbLoginListener){
@@ -109,7 +113,7 @@ public class ChatSessionManager {
                     @Override
                     public void processMessage(String s, QBChatMessage qbChatMessage, Integer integer) {
                         EventBus.getDefault().post(new ActiveChatEvent(s,qbChatMessage,integer));
-                        //NotificationHelper.notify(context,qbChatMessage.getBody(),"");
+                        NotificationHelper.notify(context,qbChatMessage.getBody(),"");
                     }
 
                     @Override

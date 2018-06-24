@@ -95,7 +95,7 @@ public class ScreenChatList extends AppCompatActivity implements ChatListView, C
         chatListPresenter.checkUserHasPastChats();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe
     public void onChatMessageReceived(ActiveChatEvent event){
 
         for(Dialog dialog : mDialogList){

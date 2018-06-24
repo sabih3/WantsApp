@@ -22,6 +22,8 @@ public class AuthBAL {
         // return message
 
         QBUser qbUser = new QBUser(phoneNumber,phoneNumber);
+
+        
         ChatSessionManager.getInstance().login(qbUser, new ChatSessionManager.QBLoginListener() {
             @Override
             public void onLoggedInChat() {
